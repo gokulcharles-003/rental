@@ -1,0 +1,112 @@
+<header >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <a class="navbar-brand fw-bold" href="#">Rental Booking</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/contact">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/signup">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+ <section class="hero d-flex align-items-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 hero-text">
+                <h1 class="fw-bold">Your Dream Rental is Just a Click Away</h1>
+                <p class="lead mt-3">Welcome to <b>Rental Booking System</b> - the most trusted platform to connect Owners and Tenants.
+                Post your property, find verified rentals, sign digital lease agreements, and make secure payments - all in one place.</p>
+                <div class="mt-4">
+                    <a routerLink="/signup" class="btn btn-primary btn-lg me-3">Get Started</a>
+                    <a routerLink="/login" class="btn btn-outline-light btn-lg">Login</a>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <img [src]="homeUrl" class="img-fluid rounded-circle shadow-lg hero-img" alt="Rental Home">
+            </div>
+        </div>
+    </div>
+ </section>
+
+ <!-- Owner Section -->
+<section class="info-section container py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h2>For Owners</h2>
+            <p class="mt-3">List your property in minutes and reach verified tenants instantly.
+                Manage leases, payments, and tenant communications with ease.
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <img [src]="ownerUrl" class="img-fluid rounded shadow" alt="Owners">
+        </div>
+    </div>
+</section>
+
+<!-- Tenants Section -->
+ <section class="info-section bg-light py-5">
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-md-6">
+                <h2>For Tenants</h2>
+                <p class="mt-3">Browse thousands of verified listings, apply for leases, and pay rent securely online.
+                    Enjoy transparency and convenience at your fingertips.
+                </p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img [src]="tenantUrl" class="img-fluid rounded shadow" alt="Tenants">
+            </div>
+        </div>
+    </div>
+ </section>
+
+ <!-- Steps Section -->
+  <section class="steps py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-5">How It Works</h2>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card p-3 shadow step-card">
+                    <img [src]="registerUrl" class="mx-auto mb-3 step-img" alt="Step 1" height="200px" width="200px">
+                    <h5>1. Register</h5>
+                    <p>Create an account as Owner or Tenant to start your journey.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 shadow step-card">
+                    <img [src]="propertyUrl" class="mx-auto mb-3 step-img" alt="Step 2" height="200px" width="230px">
+                    <h5>2. Post/Find Property</h5>
+                    <p>Owners can list properties, tenants can search and apply.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 shadow step-card">
+                    <img [src]="agreementUrl" class="mx-auto mb-3 step-img" alt="Step 3" height="200px" width="200px">
+                    <h5>3.Lease Agreement</h5>
+                    <p>Complete agreements digitally with secure handling.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 shadow step-card">
+                    <img [src]="paymentsUrl" class="mx-auto mb-3 step-img" alt="Step 4" height="200px" width="200px">
+                    <h5>4.Payments</h5>
+                    <p>Pay and track rental payments with ease and safety.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+<footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">&copy; 2025 Rental Booking System | All Rights Reserved</p>
+</footer>

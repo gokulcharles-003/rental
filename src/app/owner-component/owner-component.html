@@ -1,0 +1,153 @@
+<header class="app-header">
+    <h1>Property Management System</h1>
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#properties">Properties</a>
+        <a href="#leases">Leases</a>
+        <a href="#payments">Payments</a>
+        <a href="#maintenance">Maintenance</a>
+    </nav>
+</header>
+<main class="owner-module">
+    <section id="dashboard" class="section">
+        <h2>Owner Dashboard</h2>
+        <div class="card-grid">
+            <div class="card">Properties: {{summary.properties}}</div>
+            <div class="card">Applications: {{summary.applications}}</div>
+            <div class="card">Leases: {{summary.leases}}</div>
+            <div class="card">Payments: {{summary.payments}}</div>
+            <div class="card">Maintenance: {{summary.maintenance}}</div>
+        </div>
+    </section>
+
+    <section id="properties" class="section">
+        <h2 style="align-self: center;">My Properties</h2>
+       <form (ngSubmit)="addProperty()" class="property-form">
+            <input [(ngModel)]="newProperty.propertyId" name="propertyId" placeholder="Property ID" required>
+            <input [(ngModel)]="newProperty.ownerId" name="ownerId" placeholder="Owner ID" required>
+            <input [(ngModel)]="newProperty.name" name="name" placeholder="Property Name" required>
+            <input [(ngModel)]="newProperty.address" name="address" placeholder="Address" required>
+            <input [(ngModel)]="newProperty.rentAmount" name="rentAmount" placeholder="Rent Amount" required>
+
+            <select [(ngModel)]="newProperty.availabilityStatus" name="availabilityStatus">
+                <option value="Available">Available</option>
+                <option value="Leased">Leased</option>
+                <option value="Not Available">Not Available</option>
+            </select>
+
+            <input type="file" (change)="onImageSelected($event)">
+            <button type="submit">Add Property</button>
+        </form>
+        
+        <table class="property-table">
+            <thead>
+                <tr>
+                <th>Property ID</th>
+                <th>Name</th>
+                <th>Rent</th>
+                <th>Status</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of properties">
+                <td>{{p.propertyId}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.rentAmount}}</td>
+                <td>{{p.availabilityStatus}}</td>
+                <td>
+                    <button (click)="openImage(p.image)">View</button>
+                </td>
+                <td>
+                    <button (click)="openEditForm(p)">Edit</button>
+                    <button (click)="deleteProperty(p)">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- image pop up modal -->
+    <div class="modal" *ngIf="selectedImage">
+        <div class="modal-content">
+            <span class="close-btn" (click)="closeImage()">&times;</span>
+            <img [src]="selectedImage" alt="Property Image">
+        </div>
+    </div>
+
+    <!-- Edit property modal -->
+     <div class="modal" *ngIf="editPropertyData">
+        <div class="modal-content edit-form">
+            <span class="close-btn" (click)="closeEditForm()">&times;</span>
+            <h3>Edit Property</h3>
+            <form (ngSubmit)="submitEdit()">
+                <label>Property ID</label>
+                <input [(ngModel)]="editPropertyData.propertyId" name="propertyId" disabled/>
+
+                <label>Owner ID</label>
+                <input [(ngModel)]="editPropertyData.ownerId" name="ownerId" disabled/>
+
+                <label>Property Name</label>
+                <input [(ngModel)]="editPropertyData.name" name="name" required/>
+
+                <label>Address</label>
+                <input [(ngModel)]="editPropertyData.address" name="address" required/>
+
+                <label>Rent Amount</label>
+                <input [(ngModel)]="editPropertyData.rentAmount" name="rentAmount" required/>
+
+                <label>Status</label>
+                <select [(ngModel)]="editPropertyData.availabilityStatus" name="availabilityStatus">
+                    <option value="Available">Available</option>
+                    <option value="Leased">Leased</option>
+                    <option value="Not Available">Not Available</option>
+                </select>
+
+                <label>Image</label>
+                <input type="file" (change)="onEditImageSelected($event)"/>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+     </div>
+
+    <section id="tenant" class="section">
+        <h3>Tenant Applications</h3>
+        <div *ngFor="let app of applications" class="applications">
+            <p>{{app.tenant}} applied for {{app.property}}</p>
+            <button (click)="approve(app)">Approve</button>
+            <button (click)="reject(app)">Reject</button>
+        </div>
+    </section>
+        
+
+    <section id="leases" class="section">
+        <h2>Leases</h2>
+        <ul>
+            <li *ngFor="let lease of leases">{{lease.property}} - {{lease.tenant}} ({{lease.start}} to {{lease.end}})
+                <button (click)="renewLease(lease)">Renew</button>
+                <button (click)="terminateLease(lease)">Terminate</button>
+            </li>
+        </ul>
+    </section>
+
+    <section id="payments" class="section">
+        <h2>Payments</h2>
+        <ul>
+            <li *ngFor="let pay of payments">{{pay.tenant}} paid $ {{pay.amount}} on {{pay.date}} ({{pay.status}})</li>
+        </ul>
+    </section>
+
+    <section id="maintenance" class="section">
+        <h2>Maintenance Requests</h2>
+        <ul>
+            <li *ngFor="let m of maintenance">{{m.property}} - {{m.issue}} [{{m.status}}]
+                <button (click)="resolve(m)">Mark Resolved</button>
+            </li>
+        </ul>
+    </section>
+</main>
+
+<footer class="app-footer">
+    <p>&copy; 2025 Property Management System | Designed by Rahul & Team</p>
+</footer>
