@@ -1,0 +1,44 @@
+<div class="card-tenant">
+  <h2>Lease Agreement Review</h2>
+ 
+  <div class="grid">
+    <div class="label">Property</div>
+    <div class="value">123 Maple Street</div>
+ 
+    <div class="label">Landlord</div>
+    <div class="value">John Smith</div>
+ 
+    <div class="label">Rent</div>
+    <div class="value">{{ lease.monthlyRent | currency }}</div>
+ 
+    <div class="label">Security Deposit</div>
+    <div class="value">{{ lease.securityDeposit | currency }}</div>
+ 
+    <div class="label">Start Date</div>
+    <div class="value">{{ lease.startDate | date }}</div>
+ 
+    <div class="label">End Date</div>
+    <div class="value">{{ lease.endDate | date }}</div>
+ 
+    <div class="label">Lease Terms</div>
+    <div class="value">{{ lease.terms }}</div>
+  </div>
+ 
+  <form #confirmForm="ngForm" (ngSubmit)="onAccept(confirmForm)">
+    <label class="confirm">
+      <input type="checkbox" name="confirm" [(ngModel)]="confirmChecked" required />
+      I confirm I have read and accept the lease terms
+    </label>
+ 
+    <div class="signature-upload">
+      <label>Upload Digital Signature (PNG/JPG):</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" required />
+    </div>
+ 
+    <div class="actions">
+      <button type="button" (click)="onReject()" class="btn-reject">Reject</button>
+      <button type="submit" class="btn-accept">Accept & Sign</button>
+    </div>
+  </form>
+</div>
+ 
