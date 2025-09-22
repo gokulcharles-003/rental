@@ -23,28 +23,33 @@
     <section id="properties" class="section">
         <h2 style="align-self: center;">My Properties</h2>
        <form (ngSubmit)="addProperty()" class="property-form">
-            <input [(ngModel)]="newProperty.propertyId" name="propertyId" placeholder="Property ID" required>
-            <input [(ngModel)]="newProperty.ownerId" name="ownerId" placeholder="Owner ID" required>
+            <input [(ngModel)]="newProperty.propertyId" name="propertyId" placeholder="Property ID" type="number" required>
             <input [(ngModel)]="newProperty.name" name="name" placeholder="Property Name" required>
             <input [(ngModel)]="newProperty.address" name="address" placeholder="Address" required>
             <input [(ngModel)]="newProperty.rentAmount" name="rentAmount" placeholder="Rent Amount" required>
+
+            <input type="number" [(ngModel)]="newProperty.size" name="size" placeholder="Size (sq.ft)">
 
             <select [(ngModel)]="newProperty.availabilityStatus" name="availabilityStatus">
                 <option value="Available">Available</option>
                 <option value="Leased">Leased</option>
                 <option value="Not Available">Not Available</option>
             </select>
+            <textarea [(ngModel)]="newProperty.description" name="description" placeholder="Description"></textarea>
 
             <input type="file" (change)="onImageSelected($event)">
+            
             <button type="submit">Add Property</button>
         </form>
-        
+
+        <h2>Property List</h2>
         <table class="property-table">
             <thead>
                 <tr>
                 <th>Property ID</th>
                 <th>Name</th>
                 <th>Rent</th>
+                <th>Size</th>
                 <th>Status</th>
                 <th>Image</th>
                 <th>Actions</th>
@@ -55,6 +60,7 @@
                 <td>{{p.propertyId}}</td>
                 <td>{{p.name}}</td>
                 <td>{{p.rentAmount}}</td>
+                <td>{{p.size}}</td>
                 <td>{{p.availabilityStatus}}</td>
                 <td>
                     <button (click)="openImage(p.image)">View</button>
@@ -81,21 +87,21 @@
         <div class="modal-content edit-form">
             <span class="close-btn" (click)="closeEditForm()">&times;</span>
             <h3>Edit Property</h3>
-            <form (ngSubmit)="submitEdit()">
+            <form (ngSubmit)="UpdateProperty()">
                 <label>Property ID</label>
-                <input [(ngModel)]="editPropertyData.propertyId" name="propertyId" disabled/>
-
-                <label>Owner ID</label>
-                <input [(ngModel)]="editPropertyData.ownerId" name="ownerId" disabled/>
+                <input [(ngModel)]="editPropertyData.propertyId" name="propertyId" type="number" disabled/>
 
                 <label>Property Name</label>
-                <input [(ngModel)]="editPropertyData.name" name="name" required/>
+                <input [(ngModel)]="editPropertyData.name" name="name" type="text" required/>
 
                 <label>Address</label>
-                <input [(ngModel)]="editPropertyData.address" name="address" required/>
+                <input [(ngModel)]="editPropertyData.address" name="address" type="text" required/>
 
                 <label>Rent Amount</label>
-                <input [(ngModel)]="editPropertyData.rentAmount" name="rentAmount" required/>
+                <input [(ngModel)]="editPropertyData.rentAmount" name="rentAmount" type="number" required/>
+
+                <label>Size</label>
+                <input name="size" [(ngModel)]="editPropertyData.size" type="number"/>
 
                 <label>Status</label>
                 <select [(ngModel)]="editPropertyData.availabilityStatus" name="availabilityStatus">
@@ -104,8 +110,12 @@
                     <option value="Not Available">Not Available</option>
                 </select>
 
+                <label>Description</label>
+                <textarea [(ngModel)]="editPropertyData.description" name="description"></textarea>
+
                 <label>Image</label>
                 <input type="file" (change)="onEditImageSelected($event)"/>
+
                 <button type="submit">Save Changes</button>
             </form>
         </div>

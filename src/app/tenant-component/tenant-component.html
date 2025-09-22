@@ -1,0 +1,57 @@
+<div class="tenant-module">
+ 
+  <!-- Dashboard -->
+  <section class="dashboard">
+    <h2>Tenant Dashboard</h2>
+    <div class="card-grid">
+      <div class="card">Properties: {{ properties.length }}</div>
+      <div class="card">Applications: {{ leaseApplications.length }}</div>
+      <div class="card">Payments: {{ payments.length }}</div>
+      <div class="card">Requests: {{ maintenanceRequests.length }}</div>
+    </div>
+  </section>
+ 
+  <!-- Available Properties -->
+  <section class="properties">
+    <h2>Available Properties</h2>
+    <div *ngFor="let p of properties" class="property-card">
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.address }}</p>
+      <p>Rent: ₹{{ p.rentAmount }}</p>
+      <p>Status: {{ p.availabilityStatus }}</p>
+      <button (click)="applyForLease(p)">Apply</button>
+    </div>
+  </section>
+ 
+  <!-- Lease Applications -->
+  <section class="leases">
+    <h2>My Lease Applications</h2>
+    <ul>
+      <li *ngFor="let app of leaseApplications">
+        {{ app.propertyName }} - {{ app.status }}
+      </li>
+    </ul>
+  </section>
+ 
+  <!-- Payments -->
+  <section class="payments">
+    <h2>My Payments</h2>
+    <ul>
+      <li *ngFor="let pay of payments">
+        ₹{{ pay.amount }} for {{ pay.propertyName }} - {{ pay.status }}
+        <br />
+        <small>{{ pay.date }}</small>
+      </li>
+    </ul>
+  </section>
+ 
+  <!-- Maintenance -->
+  <section class="maintenance">
+    <h2>Maintenance Requests</h2>
+    <input [(ngModel)]="newRequest" placeholder="Enter issue" />
+    <button (click)="raiseRequest()">Raise</button>
+    <ul>
+      <li *ngFor="let req of maintenanceRequests">{{ req }}</li>
+    </ul>
+  </section>
+</div>

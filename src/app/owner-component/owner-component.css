@@ -93,7 +93,7 @@ html{
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.property-form input, .property-form select, .property-form button{
+.property-form input, .property-form select, .property-form button .property-form textarea{
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
