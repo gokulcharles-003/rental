@@ -4,8 +4,10 @@ import { Home } from './home/home';
 import { TenantComponent } from './tenant-component/tenant-component';
 
 export const routes: Routes = [
-    {path:'', redirectTo: 'home', pathMatch: 'full'},
-    {path:'home', component:Home},
-    // {path:'tenant/signup', component: TenantSignup},
-    {path: 'tenant', component: TenantComponent},
+    { path: '', redirectTo: 'tenant/login', pathMatch: 'full' },
+    {path: 'home', component: Home},
+    {path: 'tenant', component: TenantComponent}
+
 ];
+
+

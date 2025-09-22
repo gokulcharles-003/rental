@@ -1,0 +1,54 @@
+<div class="card">
+  <h2>Create Lease Agreement</h2>
+ 
+  <form #leaseForm="ngForm" (ngSubmit)="onSendToTenant(leaseForm)" novalidate>
+    <label>Property</label>
+    <select name="propertyId" [(ngModel)]="lease.propertyId" required>
+      <option value="" disabled>Select property</option>
+      <option *ngFor="let p of properties" [value]="p.id">{{ p.label }}</option>
+    </select>
+ 
+    <label>Tenant</label>
+    <select name="tenantId" [(ngModel)]="lease.tenantId" required>
+      <option value="" disabled>Select tenant</option>
+      <option *ngFor="let t of tenants" [value]="t.id">{{ t.name }}</option>
+    </select>
+ 
+    <div class="row">
+      <div>
+        <label>Lease Start</label>
+        <input type="date" name="startDate" [(ngModel)]="lease.startDate" required />
+      </div>
+      <div>
+        <label>Lease End</label>
+        <input type="date" name="endDate" [(ngModel)]="lease.endDate" required />
+      </div>
+    </div>
+ 
+    <label>Monthly Rent</label>
+    <input
+      type="number"
+      name="monthlyRent"
+      [(ngModel)]="lease.monthlyRent"
+      required
+      min="1"
+    />
+ 
+    <label>Security Deposit</label>
+    <input
+      type="number"
+      name="securityDeposit"
+      [(ngModel)]="lease.securityDeposit"
+      required
+      min="0"
+    />
+ 
+    <label>Lease Terms</label>
+    <textarea name="terms" [(ngModel)]="lease.terms" rows="5" required></textarea>
+ 
+    <div class="actions">
+      <button type="button" (click)="onSaveDraft(leaseForm)" class="btn-outline">Save Draft</button>
+      <button type="submit" class="btn-primary">Send to Tenant</button>
+    </div>
+  </form>
+</div>
