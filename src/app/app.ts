@@ -1,13 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Home } from './home/home';
-import { OwnerComponent } from './owner-component/owner-component';
-import { LandlordLeaseComponent } from "./landlord-lease/landlord-lease";
-import { TenantLeaseComponent } from "./tenant-lease/tenant-lease";
+import { RouterLink, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Home, OwnerComponent, LandlordLeaseComponent, TenantLeaseComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
