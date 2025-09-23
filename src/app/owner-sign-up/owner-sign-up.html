@@ -1,11 +1,54 @@
+<header >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+            <!-- <i class="bi bi-house-door-fill me-2 p-3 mb-3" style="font-size: 40px; color: #aab3c6;"></i> -->
+            <h2> <i class="bi bi-arrow-left-circle-fill" style="margin-right: 20px;"></i>Home</h2>
+        </a>
+    </nav>  
+</header>    
+
 <div class="signup-container">
   <h2>Owner Signup</h2>
-   <form (ngSubmit)="onSignup()">
+  <form (submit)="onSignup()">
     <input type="text" placeholder="Name" [(ngModel)]="name" name="name" required />
+    <div *ngIf="showErrors && !name" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+
     <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+    <div *ngIf="showErrors && !email" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+    <div *ngIf="showErrors && email && !isValidEmail(email)" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please enter a valid email
+    </div>
+
     <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+    <div *ngIf="showErrors && !password" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+
+    <input type="text" placeholder="Mobile Number" [(ngModel)]="mobile" name="mobile" required />
+    <div *ngIf="showErrors && !mobile" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+    <div *ngIf="showErrors && mobile && mobile.length !== 10" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please enter a valid 10-digit mobile number
+    </div>
+
+    <textarea placeholder="Address" [(ngModel)]="address" name="address" required minlength="50"></textarea>
+    <div *ngIf="showErrors && !address" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+    <div *ngIf="showErrors && address && address.length < 20" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Address must be at least 20 characters
+    </div>
+
     <button type="submit">Signup</button>
   </form>
+  <p style="font-size: 15px; font-weight: 400;">
     Already have an account?
-    <a routerLink="/owner/login" >Owner login here</a>
-    </div>
+  <a routerLink="/owner/login">login</a>
+  </p>
+  
+</div>

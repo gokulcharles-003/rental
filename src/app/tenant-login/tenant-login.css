@@ -1,77 +1,97 @@
-
-.login-container, .signup-container {
-  width: 350px;
-  margin: 80px auto;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+.login-container {
+  width: 400px;
+  margin: 60px auto;
+  padding: 38px 32px;
+  background: #f8fbff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.12);
   text-align: center;
+  box-sizing: border-box;
 }
  
 
-.login-container h2, .signup-container h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
+.login-container h2 {
+  margin-bottom: 24px;
+  font-size: 28px;
   font-weight: bold;
-  color: #333;
+  color: #1976d2;
 }
  
 
-.login-container input,
-.signup-container input {
+.login-container form {
+  padding: 12px 8px 0 8px;
+}
+
+.login-container input {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 14px;
+  margin: 18px 0;
+  border: 1.5px solid #b3c2e0;
+  border-radius: 10px;
   outline: none;
-  font-size: 14px;
-  transition: border 0.3s;
+  font-size: 15px;
+  background: #f4f8fc;
+  transition: border 0.3s, box-shadow 0.3s, background 0.3s, transform 0.2s;
 }
  
 .login-container input:focus,
-.signup-container input:focus {
-  border-color: #007bff;
+.login-container input:hover {
+  border-color: #1976d2;
+  background: #e3f2fd;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.13);
+  transform: scale(1.03);
 }
- 
 
-.login-container button,
-.signup-container button {
+.login-container button {
   width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: #007bff;
+  padding: 14px;
+  margin-top: 18px;
+  background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  box-shadow: 0 2px 12px rgba(239, 240, 240, 0.1);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  margin-bottom: 10px;
 }
  
 .login-container button:hover,
-.signup-container button:hover {
-  background: #0056b3;
+.login-container button:focus {
+  background: linear-gradient(90deg, #1565c0 60%, #4f9aae 100%);
+  color: #f1f3f4;
+  transform: scale(1.05);
+  box-shadow: 0 4px 18px rgba(25, 118, 210, 0.18);
+  outline: none;
 }
  
 
-.login-container p,
-.signup-container p {
+.login-container p{
   margin-top: 15px;
   font-size: 14px;
   color: #555;
 }
  
-.login-container a,
-.signup-container a {
+.login-container a {
   color: #007bff;
   text-decoration: none;
   font-weight: 500;
 }
  
-.login-container a:hover,
-.signup-container a:hover {
+.login-container a:hover{
   text-decoration: underline;
 }
- 
+
+.alert-msg {
+  color: #d32f2f;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.alert-msg i {
+  font-size: 1.2rem;
+}

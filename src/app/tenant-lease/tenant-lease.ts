@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import { LeaseModel } from '../landlord-lease/landlord-lease';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
  
 @Component({
   selector: 'app-tenant-lease',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './tenant-lease.html',
   styleUrls: ['./tenant-lease.css']
 })
 export class TenantLeaseComponent {
-  @Input() lease: LeaseModel = {
+  lease = {
     propertyId: 'p1',
     tenantId: 't1',
     startDate: '2025-01-01',
@@ -21,38 +21,34 @@ export class TenantLeaseComponent {
     terms: 'No smoking. No pets without approval.',
     status: 'SENT'
   };
- 
-  @Output() accepted = new EventEmitter<void>();
-  @Output() rejected = new EventEmitter<void>();
- 
+
   confirmChecked = false;
   signatureFile: File | null = null;
- 
+
+  @Output() accepted = new EventEmitter<void>();
+  @Output() rejected = new EventEmitter<void>();
+
   onFileSelected(event: any) {
     this.signatureFile = event.target.files[0];
   }
- 
-  onAccept(form: NgForm) {
-    if (!form.valid) {
-      alert('You must confirm acceptance and upload your signature.');
+
+  onAccept() {
+    if (!this.confirmChecked) {
+      alert('You must confirm acceptance before signing.');
       return;
     }
     if (!this.signatureFile) {
       alert('Please upload your digital signature before signing.');
       return;
     }
- 
     this.lease.status = 'ACTIVE';
-    console.log('Tenant accepted lease with signature', this.lease, this.signatureFile);
     this.accepted.emit();
     alert('Lease accepted and signed!');
   }
- 
+
   onReject() {
     this.lease.status = 'REJECTED';
-    console.log('Tenant rejected lease', this.lease);
     this.rejected.emit();
     alert('Lease rejected!');
   }
 }
- 

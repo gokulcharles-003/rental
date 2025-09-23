@@ -1,32 +1,29 @@
 <header class="app-header">
     <h1>Property Management System</h1>
     <nav>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#properties">Properties</a>
-        <a href="#leases">Leases</a>
-        <a href="#payments">Payments</a>
-        <a href="#maintenance">Maintenance</a>
+        <a routerLink="/tenant/applications" class="nav-btn">Applications</a>
+        <a routerLink="payments" class="nav-btn">Payments</a>
+        <a routerLink="/home" class="nav-btn">Logout</a>
     </nav>
 </header>
 <main class="owner-module">
-    <section id="dashboard" class="section">
+    <section class="dashboard" class="section">
         <h2>Owner Dashboard</h2>
         <div class="card-grid">
             <div class="card">Properties: {{summary.properties}}</div>
             <div class="card">Applications: {{summary.applications}}</div>
             <div class="card">Leases: {{summary.leases}}</div>
             <div class="card">Payments: {{summary.payments}}</div>
-            <div class="card">Maintenance: {{summary.maintenance}}</div>
         </div>
     </section>
 
     <section id="properties" class="section">
         <h2 style="align-self: center;">My Properties</h2>
        <form (ngSubmit)="addProperty()" class="property-form">
-            <input [(ngModel)]="newProperty.propertyId" name="propertyId" placeholder="Property ID" type="number" required>
-            <input [(ngModel)]="newProperty.name" name="name" placeholder="Property Name" required>
-            <input [(ngModel)]="newProperty.address" name="address" placeholder="Address" required>
-            <input [(ngModel)]="newProperty.rentAmount" name="rentAmount" placeholder="Rent Amount" required>
+            <input type="number" [(ngModel)]="newProperty.propertyId" name="propertyId" placeholder="Property ID" required>
+            <input type="text" [(ngModel)]="newProperty.name" name="name" placeholder="Property Name" required>
+            <input type="text" [(ngModel)]="newProperty.address" name="address" placeholder="Address" required>
+            <input type="number" [(ngModel)]="newProperty.rentAmount" name="rentAmount" placeholder="Rent Amount" required>
 
             <input type="number" [(ngModel)]="newProperty.size" name="size" placeholder="Size (sq.ft)">
 
@@ -35,7 +32,7 @@
                 <option value="Leased">Leased</option>
                 <option value="Not Available">Not Available</option>
             </select>
-            <textarea [(ngModel)]="newProperty.description" name="description" placeholder="Description"></textarea>
+            <textarea type="text" [(ngModel)]="newProperty.description" name="description" placeholder="Description"></textarea>
 
             <input type="file" (change)="onImageSelected($event)">
             
@@ -63,18 +60,18 @@
                 <td>{{p.size}}</td>
                 <td>{{p.availabilityStatus}}</td>
                 <td>
-                    <button (click)="openImage(p.image)">View</button>
+                    <button (click)="openImage(p.image)" class="view-btn">View</button>
                 </td>
                 <td>
-                    <button (click)="openEditForm(p)">Edit</button>
-                    <button (click)="deleteProperty(p)">Delete</button>
+                    <button (click)="openEditForm(p)" class="edit-btn">Edit</button>
+                    <button (click)="deleteProperty(p)" class="delete-btn">Delete</button>
                 </td>
             </tr>
             </tbody>
         </table>
     </section>
 
-    <!-- image pop up modal -->
+    <!--this is image pop up modal -->
     <div class="modal" *ngIf="selectedImage">
         <div class="modal-content">
             <span class="close-btn" (click)="closeImage()">&times;</span>
@@ -82,7 +79,7 @@
         </div>
     </div>
 
-    <!-- Edit property modal -->
+    <!--this is edit property modal -->
      <div class="modal" *ngIf="editPropertyData">
         <div class="modal-content edit-form">
             <span class="close-btn" (click)="closeEditForm()">&times;</span>
@@ -111,7 +108,7 @@
                 </select>
 
                 <label>Description</label>
-                <textarea [(ngModel)]="editPropertyData.description" name="description"></textarea>
+                <input [(ngModel)]="editPropertyData.description" name="description">
 
                 <label>Image</label>
                 <input type="file" (change)="onEditImageSelected($event)"/>
@@ -120,42 +117,35 @@
             </form>
         </div>
      </div>
-
-    <section id="tenant" class="section">
-        <h3>Tenant Applications</h3>
-        <div *ngFor="let app of applications" class="applications">
-            <p>{{app.tenant}} applied for {{app.property}}</p>
-            <button (click)="approve(app)">Approve</button>
-            <button (click)="reject(app)">Reject</button>
-        </div>
-    </section>
         
-
     <section id="leases" class="section">
         <h2>Leases</h2>
         <ul>
-            <li *ngFor="let lease of leases">{{lease.property}} - {{lease.tenant}} ({{lease.start}} to {{lease.end}})
-                <button (click)="renewLease(lease)">Renew</button>
-                <button (click)="terminateLease(lease)">Terminate</button>
-            </li>
+            <li *ngFor="let lease of leases">   
+            {{lease.property}} - {{lease.tenant}} ({{lease.start}} to {{lease.end}})
+            <span 
+                [ngClass]="{
+                    'lease-status-pending': lease.status === 'Pending',
+                    'lease-status-renewed': lease.status === 'Renewed',
+                    'lease-status-terminated': lease.status === 'Terminated'
+                }"><br>
+               Status: {{lease.status}}
+            </span>
+            <div *ngIf="lease.status === 'Pending'">
+                <button (click)="renewLease(lease)" class="renew-btn">Renew</button>
+                <button (click)="terminateLease(lease)" class="terminate-btn">Terminate</button>
+            </div>
+        </li>
         </ul>
     </section>
 
     <section id="payments" class="section">
         <h2>Payments</h2>
         <ul>
-            <li *ngFor="let pay of payments">{{pay.tenant}} paid $ {{pay.amount}} on {{pay.date}} ({{pay.status}})</li>
+            <li *ngFor="let pay of payments"><p>{{pay.tenant}} paid $ {{pay.amount}} on {{pay.date}} ({{pay.status}})</p></li>
         </ul>
     </section>
 
-    <section id="maintenance" class="section">
-        <h2>Maintenance Requests</h2>
-        <ul>
-            <li *ngFor="let m of maintenance">{{m.property}} - {{m.issue}} [{{m.status}}]
-                <button (click)="resolve(m)">Mark Resolved</button>
-            </li>
-        </ul>
-    </section>
 </main>
 
 <footer class="app-footer">

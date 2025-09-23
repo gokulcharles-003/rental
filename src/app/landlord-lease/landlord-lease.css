@@ -1,55 +1,122 @@
-.card {
-  max-width: 700px;
-  margin: auto;
-  padding: 24px;
-  border-radius: 12px;
-  background: #f9fafb;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  height: 100vh;
+  background: rgba(25, 118, 210, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
- 
-h2 {
-  margin-bottom: 16px;
-  color: #0f172a;
+
+.modal-content.edit-form {
+  width: 420px;
+  max-height: 600px;
+  padding: 0;
+  border-radius: 14px;
+  background: #f8fbff;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-x: hidden;
+  position: relative;
 }
- 
-label {
+
+.lease-form-header {
+  position: sticky;
+  top: 0;
+  background: #f8fbff;
+  z-index: 2;
+  padding: 24px 28px 8px 28px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lease-form-header h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.close-btn {
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  margin-left: 12px;
+  transition: color 0.2s, transform 0.2s;
+}
+.close-btn:hover {
+  color: #d32f2f;
+  transform: scale(1.2);
+}
+
+.lease-form form {
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 28px 18px 28px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.lease-form label {
+  text-align: left;
   display: block;
-  margin-top: 12px;
-  font-weight: 600;
+  margin-bottom: 6px;
+  margin-top: 14px;
+  font-weight: 500;
+  color: #1565c0;
 }
- 
-input, select, textarea {
+
+.lease-form input,
+.lease-form select,
+.lease-form textarea {
   width: 100%;
   padding: 10px;
-  margin-top: 4px;
+  margin-bottom: 8px;
+  border: 1.2px solid #b3c2e0;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #f4f8fc;
+  transition: border 0.3s, box-shadow 0.3s, background 0.3s;
 }
- 
-.row {
-  display: flex;
-  gap: 16px;
+
+.lease-form input:focus,
+.lease-form select:focus,
+.lease-form textarea:focus {
+  border-color: #1976d2;
+  background: #e3f2fd;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
 }
- 
-.actions {
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
- 
-.btn-primary {
-  background: #2563eb;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
+
+.lease-form button[type="submit"] {
+  margin-top: 16px;
+  padding: 12px;
+  background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
+  color: #fff;
   border: none;
-}
- 
-.btn-outline {
-  background: white;
-  border: 1px solid #2563eb;
-  padding: 10px 16px;
   border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
- 
+
+.lease-form button[type="submit"]:hover,
+.lease-form button[type="submit"]:focus {
+  background: linear-gradient(90deg, #1565c0 60%, #f8d90f 100%);
+  color: #1976d2;
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+  outline: none;
+}

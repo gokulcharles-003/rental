@@ -2,7 +2,7 @@ html{
     scroll-behavior: smooth;
 }
 .app-header{
-    background: #007bff;
+    background: #0853a4;
     color: white;
     padding: 15px 20px;
     display: flex;
@@ -11,10 +11,11 @@ html{
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-radius: 10px;
 }
 .app-header h1{
     margin: 0;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .app-header nav a{
@@ -27,6 +28,32 @@ html{
     text-decoration: underline;
 }
 
+nav .nav-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    margin: 0 8px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    box-shadow: 0 2px 6px rgba(25, 118, 210, 0.08);
+    cursor: pointer;
+    text-decoration: none !important;
+    outline: none;
+}
+
+nav .nav-btn:hover, nav .nav-btn:focus {
+    background: #1565c0;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.18);
+    transform: translateY(-2px) scale(1.05);
+    text-decoration: none;
+    outline: none;
+}
+
 .section{
     padding: 30px 20px;
     margin: 20px auto;
@@ -34,15 +61,6 @@ html{
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     max-width: 1200px;
-}
-
-.app-footer{
-    background: #f1f1f1;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
-    font-size: 14px;
 }
 
 .owner-module{
@@ -93,7 +111,7 @@ html{
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.property-form input, .property-form select, .property-form button .property-form textarea{
+.property-form input, .property-form select, .property-form button {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -101,11 +119,16 @@ html{
 }
 
 .property-form button{
-    background: #007bff;
+    background: #495b6d;
     color: white;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    height: 45px;
+    width: 250px;
+    font-size: 20px;
+    align-items: center;
+    margin-left: 140px;
 }
 
 .property-form button:hover{
@@ -123,18 +146,6 @@ th, td{
 }
 th{
     background: #f0f0f0;
-}
-
-.application{
-    background: #eef;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 5px;
-    width: 500px;
-}
-
-.finance h2{
-    margin-top: 20px;
 }
 
 .property-table{
@@ -156,17 +167,22 @@ button{
     margin: 3px;
     padding: 5px 10px;
     border: none;
-    background: #007bff;
     color: white;
     border-radius: 4px;
     cursor: pointer;
 }
+.property-table .view-btn{
+    background: #17A2B8;
 
-button:hover{
-    background: #0056b3;
+}
+.property-table .edit-btn{
+    background: #28A745;
+
+}
+.property-table .delete-btn{
+    background: red;
 }
 
-/* Modal overlay */
 .modal{
     position: fixed;
     top: 0;
@@ -198,45 +214,232 @@ button:hover{
     max-height: 70vh;
     border-radius: 8px;
 }
-.close-btn{
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #333;
-}
 
-.close-btn:hover {
-    color: red;
+/* for edit form */
+.modal-content.edit-form {
+  width: 420px;
+  padding: 32px 28px;
+  border-radius: 14px !important;
+  background: #f8fbff;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-y: visible;
+  position: relative;
 }
 
 .edit-form form{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    max-height: 420px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 8px;
+    margin-top: 8px;
 }
- .edit-form label{
-    font-weight: bold;
- }
 
- .edit-form input,
- .edit-form select,
- .edit-form button{
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
- }
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+.close-btn:hover {
+    color: red;
+}
+.edit-form h3 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1976d2;
+}
 
- .edit-form button:hover {
-    background: #0056b3;
- }
+.edit-form label {
+  text-align: left;
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 12px;
+  font-weight: 500;
+  color: #1565c0;
+}
 
- .app-footer{
+.edit-form input,
+.edit-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1.2px solid #b3c2e0;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #f4f8fc;
+  transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.edit-form input:focus,
+.edit-form select:focus{
+  border-color: #1976d2;
+  background: #e3f2fd;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+}
+
+.edit-form button[type="submit"] {
+  margin-top: 16px;
+  padding: 12px;
+  background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.edit-form button[type="submit"]:hover,
+.edit-form button[type="submit"]:focus {
+  background: linear-gradient(90deg, #1565c0 60%, #0fd1f8 100%);
+  color: #f9fafb;
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+  outline: none;
+}
+
+/* Leases Section */
+#leases.section {
+  background: #f8fbff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
+  padding: 24px 32px;
+  margin: 32px 0 30px 48px;
+  max-width: 600px;
+}
+
+#leases.section h2 {
+  font-size: 1.5rem;
+  color: #1976d2;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+#leases.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#leases.section li {
+  font-size: 1.18rem;
+  color: #333;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  background: #e3eafc;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(25, 118, 210, 0.07);
+}
+
+/* Payments Section */
+#payments.section {
+  background: #f8fbff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
+  padding: 24px 32px;
+  margin: 32px 0 30px 48px;
+  max-width: 600px;
+}
+
+#payments.section h2 {
+  font-size: 1.5rem;
+  color: #1976d2;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+#payments.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#payments.section li {
+  font-size: 1.18rem;
+  color: #333;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  background: #e3eafc;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(25, 118, 210, 0.07);
+}
+
+@media (max-width: 900px) {
+  #leases.section,
+  #payments.section {
+    margin-left: 12px;
+    margin-right: 12px;
+    max-width: 100vw;
+    padding: 18px 10px;
+  }
+}
+#leases span{
+    margin-left: 16px; 
+    font-weight: 600;
+}
+#leases button{
+    margin-top: 4px;
+}
+.lease-status-pending {
+  color: #f8d90f;
+}
+
+.lease-status-renewed {
+  color: #28a745;
+}
+
+.lease-status-terminated {
+  color: #d32f2f;
+}
+
+.renew-btn {
+  margin-left: 12px;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.renew-btn:hover {
+  background: #218838;
+  transform: scale(1.05);
+}
+
+.terminate-btn {
+  margin-left: 8px;
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.terminate-btn:hover {
+  background: #b71c1c;
+  transform: scale(1.05);
+}
+
+.app-footer{
     text-align: center;
     padding: 15px;
     background: #2c3e50;
     color: white;
     margin-top: 20px;
-}
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+ }

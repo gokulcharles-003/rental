@@ -1,14 +1,45 @@
+<header >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+            <h2> <i class="bi bi-arrow-left-circle-fill" style="margin-right: 20px;"></i>Home</h2>
+        </a>
+    </nav>  
+</header> 
+
 <div class="signup-container">
   <h2>Tenant Signup</h2>
   <form (ngSubmit)="onSignup()">
     <input type="text" placeholder="Name" [(ngModel)]="name" name="name" required />
+    <div *ngIf="showErrors && !name" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+
     <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+    <div *ngIf="showErrors && !email" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+    <div *ngIf="showErrors && email && !isValidEmail(email)" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please enter a valid email
+    </div>
+
+    <input type="text" placeholder="Mobile Number" [(ngModel)]="mobile" name="mobile" required />
+    <div *ngIf="showErrors && !mobile" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+    <div *ngIf="showErrors && mobile && mobile.length !== 10" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please enter a valid 10-digit mobile number
+    </div>
+
     <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+    <div *ngIf="showErrors && !password" class="alert-msg">
+      <i class="bi bi-exclamation-circle-fill"></i> Please fill the above field
+    </div>
+
     <button type="submit">Signup</button>
   </form>
   
-  <p>
+  <p style="font-size: 15px; font-weight: 400;">
     Already have an account?
-    <a routerLink="/tenant/login" > Tenant login here</a>
+    <a routerLink="/tenant/login">Login</a>
   </p>
 </div>
